@@ -15,8 +15,15 @@ def listify(x, y):
     return x
 
 def datafy(x):
-    if is_listy(x): return [o.data for o in x]
-    else:           return x.data
+    # ohu testing
+    # wouldn't we really want detach?
+    # https://pytorch.org/2018/04/22/0_4_0-migration-guide.html 
+    if is_listy(x): 
+        return [o.data if hasattr(o, 'data') else o for o in x]
+    else:
+        return x.data if hasattr(x, 'data') else x
+    # if is_listy(x): return [o.data for o in x]
+    # else:           return x.data
 
 conv_dict = {np.dtype('int8'): torch.LongTensor, np.dtype('int16'): torch.LongTensor,
     np.dtype('int32'): torch.LongTensor, np.dtype('int64'): torch.LongTensor,
