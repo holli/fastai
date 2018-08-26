@@ -4,6 +4,9 @@ python:
   #  - "2.7"
   #  - "3.5"
   - "3.6"
+env:
+  - CONDA_ENV_FILE=environment-cpu.yml
+  - CONDA_ENV_FILE=environment-cpu-torch04.yml
 install:
   - sudo apt-get update
   # We do this conditionally because it saves us some downloading if the
@@ -20,7 +23,7 @@ install:
   - conda update -q conda
   # Useful for debugging any issues with conda
   - conda info -a
-  - conda env update -f environment-cpu.yml
+  - conda env update -f $CONDA_ENV_FILE
   - source activate fastai-cpu
   - pip install -U pytest pytest-cov
   # for some reason  the pip section is not supported by conda env update for the time being i've paste it here:
